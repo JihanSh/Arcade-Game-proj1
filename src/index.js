@@ -18,7 +18,11 @@ let ballSpeedX = 2;
 let ballSpeedY = 2;
 let player2Score = 0;
 let player1Score = 0;
+let ballSpeedIncreaseInterval;
 
+const speedMultiplier = 1.1; // Speed increases by 10% each time
+// const baseSpeedX = 2;
+// const baseSpeedY = 2;
 const paddleAcceleration = 1;
 const maxPaddleSpeed = 5;
 const paddleDeceleration = 1;
@@ -35,6 +39,8 @@ function startGame() {
   startText.style.display = "none";
   // without removing the event listener, the game will keep starting whenever a key is pressed, the game should start once until its finished
   document.removeEventListener("keydown", startGame);
+  startSpeedIncrease();
+
   gameLoop();
 }
 //  functionality of the game when its running
@@ -44,7 +50,7 @@ function gameLoop() {
     updatePaddle2();
     ballMovement();
     console.log("the game is running");
-    setTimeout(gameLoop, 8);
+    setTimeout(gameLoop, 10);
   }
 }
 
@@ -126,6 +132,7 @@ function ballMovement() {
   //collision with the wall
   if (ballX <= 0) {
     player2Score++;
+    playSound(lossSound);
     updateScore();
     resetBall();
     pauseGame();
@@ -145,14 +152,31 @@ function updateScore() {
   player2ScoreElement.textContent = player2Score;
 }
 
+function startSpeedIncrease() {
+  clearInterval(ballSpeedIncreaseInterval);
+  ballSpeedIncreaseInterval = setInterval(() => {
+    if (gameRunning) {
+      ballSpeedX *= speedMultiplier;
+      ballSpeedY *= speedMultiplier;
+    }
+  }, 5000); // Increase speed every 5 seconds
+}
+
 function resetBall() {
   ballX = gameWidth / 2 - ball.clientWidth / 2;
-  ballY= gameHeight / 2 - ball.clientHeight / 2;
+  ballY = gameHeight / 2 - ball.clientHeight / 2;
   ballSpeedX = Math.random() > 0.5 ? 2 : -2; //randomize the direction so it doesnt always start in the same direction
   ballSpeedY = Math.random() > 0.5 ? 2 : -2;
 }
 
 function pauseGame() {
   gameRunning = false;
+  clearInterval(ballSpeedIncreaseInterval);
   document.addEventListener("keydown", startGame);
+}
+
+
+function playSound(sound){
+  sound.currentTime = 0; 
+  sound.play()
 }
