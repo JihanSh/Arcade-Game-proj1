@@ -5,6 +5,9 @@ const paddle2 = document.getElementById("paddle2");
 const ball = document.getElementById("ball");
 const player1ScoreElement = document.getElementById("player1Score");
 const player2ScoreElement = document.getElementById("player2Score");
+const lossSound = document.getElementById("lossSound");
+const paddleSound = document.getElementById("paddleSound");
+const wallSound = document.getElementById("wallSound");
 
 let gameRunning = false;
 let keysPressed = {};
@@ -111,6 +114,7 @@ function ballMovement() {
   // the total game width minus the paddle width minus the ball width
   if (ballY >= gameHeight - ball.clientHeight || ballY <= 0) {
     ballSpeedY = -ballSpeedY;
+    playSound(wallSound);
   }
   // paddle1 collision
   if (
@@ -119,6 +123,7 @@ function ballMovement() {
     ballY <= paddle1Y + paddle1.clientHeight
   ) {
     ballSpeedX = -ballSpeedX;
+    playSound(paddleSound);
   }
 
   // paddle2 collision
@@ -128,6 +133,7 @@ function ballMovement() {
     ballY <= paddle2Y + paddle2.clientHeight
   ) {
     ballSpeedX = -ballSpeedX;
+    playSound(paddleSound);
   }
   //collision with the wall
   if (ballX <= 0) {
@@ -175,8 +181,7 @@ function pauseGame() {
   document.addEventListener("keydown", startGame);
 }
 
-
-function playSound(sound){
-  sound.currentTime = 0; 
-  sound.play()
+function playSound(sound) {
+  sound.currentTime = 0;
+  sound.play();
 }
