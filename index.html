@@ -10,24 +10,50 @@
       rel="stylesheet"
     />
     <link rel="stylesheet" href="styles.css" />
-    <script defer src="./src/index.js"></script>
-    <title>Air Hockey Game</title>
+    <title>Select Mode</title>
   </head>
   <body>
-    <h1 class="title">HOCKEY</h1>
-    <span class="score player1Score" id="player1Score">0</span>
-    <span class="score player2Score" id="player2Score">0</span>
-    <h3 class="startText" id="startText">Press any key to START the game</h3>
-    <div class="gameArea">
-      <div id="paddle1" class="paddle1 paddle"></div>
-      <div id="paddle2" class="paddle2 paddle"></div>
-      <div id="ball" class="ball"></div>
-      <div class="net"></div>
+    <div id="instructions" class="instructions">
+      <div class="player2">
+        <h2>1 Player Mode Instructions:</h2>
+        <p>
+          Use <strong>W</strong> key to move the paddle up and
+          <strong>S</strong> key to move the paddle down.
+        </p>
+      </div>
+      <div class="player1">
+        <h2>2 Players Mode Instructions:</h2>
+        <p>
+          Player1 :Use <strong>W</strong> key to move the paddle up and
+          <strong>S</strong> key to move the paddle down.
+        </p>
+        <p>
+          Player2 :Use <strong>Arrow Up</strong> key to move the paddle up and
+          <strong>Arrow Down</strong> key to move the paddle down.
+        </p>
+      </div>
     </div>
+    <h2 class="title1">Select Game Mode</h2>
+    <div id="modeButtons" class="playerMode">
+      <button onclick="selectMode('1P')" class="playerMode1">1 Player</button>
+      <button onclick="selectMode('2P')" class="playerMode2">2 Players</button>
+    </div>
+    <p class="ready">Press any key to start the game once you're ready!</p>
+
     <img src="./src/assets/machine.png" alt="Arcade Machine" class="bg" />
-<!-- add sounds later -->
-    <audio src="./src/assets/paddle.wav" id="paddleSound"></audio>
-    <audio src="./src/assets/wall.wav" id="wallSound"></audio>
-    <audio src="./src/assets/loss.wav" id="lossSound"></audio>
+
+    <script>
+      function selectMode(mode) {
+        localStorage.setItem("gameMode", mode); // Store mode
+        if (mode === "1P") {
+          // Display instructions for 1 Player mode
+          window.location.href = "./game.html";
+        }
+        // Redirect to game page after displaying instructions
+        setTimeout(function () {
+          window.location.href = "./game.html"; // Redirect to game page
+        }, 3000); // Wait for 3 seconds before redirecting
+      }
+    </script>
   </body>
 </html>

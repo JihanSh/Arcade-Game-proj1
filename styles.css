@@ -64,7 +64,10 @@ body {
   top: 88px;
   font-size: 26px;
 }
-
+.title1 {
+  position: absolute;
+  margin-top: 20%;
+}
 .score {
   position: absolute;
   top: 88px;
@@ -93,4 +96,61 @@ body {
   background: #222;
   border-radius: 4px;
   padding: 10px;
+}
+
+.playerMode {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  display: flex;
+  flex-direction: row;
+  text-align: center;
+  padding: 10px;
+  gap: 50px;
+  justify-content: center;
+  z-index: 1;
+}
+.ready {
+  position: absolute;
+  top:55%;
+  width: 500px;
+  text-align: center;
+  background: #222;
+  border-radius: 4px;
+}
+.playerMode1,
+.playerMode2 {
+  background: #222;
+  border-radius: 4px;
+  color: white;
+  height: 50px;
+  padding: 10px;
+  width: 150px;
+  font-family: "Press Start 2P", system-ui;
+}
+.instructions {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    margin: 8%;
+    width: 1900px;
+    gap: 30%;
+    color: #ccc;
+}
+.player1,
+.player2 {
+  width: 40%;
+}
+.instructions h2 {
+  font-size: 20px;
+  margin-bottom: 15px;
+}
+
+.instructions p {
+  font-size: 15px;
+}
+.playerMode1:hover,
+.playerMode2:hover {
+  background-color: #888;
 }

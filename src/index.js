@@ -36,23 +36,33 @@ document.addEventListener("keydown", startGame);
 document.addEventListener("keydown", handleKeyDown);
 document.addEventListener("keyup", handleKeyUp);
 
+let gameMode = null; // no mode is seleted yet
+
+function setGameMode(mode) {
+  gameMode = mode; // Set global game mode variable
+  startText.style.display = "block"; // Show "Press any key to start"
+}
 // start the game
 function startGame() {
+  // Prevent starting without a mode
+  if (!gameMode) return;
   gameRunning = true;
   startText.style.display = "none";
   // without removing the event listener, the game will keep starting whenever a key is pressed, the game should start once until its finished
   document.removeEventListener("keydown", startGame);
   startSpeedIncrease();
-
   gameLoop();
 }
 //  functionality of the game when its running
 function gameLoop() {
   if (gameRunning) {
     updatePaddle1();
-    updatePaddle2();
+    if (gameMode === "2P") {
+      updatePaddle2();
+    } else {
+      moveAIPaddle();
+    }
     ballMovement();
-    console.log("the game is running");
     setTimeout(gameLoop, 10);
   }
 }
@@ -184,4 +194,15 @@ function pauseGame() {
 function playSound(sound) {
   sound.currentTime = 0;
   sound.play();
+}
+
+function moveAIPaddle() {
+  let paddleCenter = paddle2Y + paddle2.clientHeight / 2;
+  if (paddleCenter < ballY - 10) {
+    paddle2Y += 3;
+  } else if (paddleCenter > ballY + 10) {
+    paddle2Y -= 3;
+  }
+  paddle2Y = Math.max(0, Math.min(gameHeight - paddle2.clientHeight, paddle2Y));
+  paddle2.style.top = paddle2Y + "px";
 }

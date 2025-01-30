@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" href="data:,">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="styles.css" />
+    <script defer src="./src/index.js"></script>
+    <title>Air Hockey Game</title>
+  </head>
+ <body>
+    <h1 class="title">HOCKEY</h1>
+    <span class="score player1Score" id="player1Score">0</span>
+    <span class="score player2Score" id="player2Score">0</span>
+
+    <p id="startText" class="startText" style="display: none">Press any key to start</p>
+
+    <div class="gameArea">
+      <div id="paddle1" class="paddle1 paddle"></div>
+      <div id="paddle2" class="paddle2 paddle"></div>
+      <div id="ball" class="ball"></div>
+      <div class="net"></div>
+    </div>
+
+    <img src="./src/assets/machine.png" alt="Arcade Machine" class="bg" />
+
+    <audio src="./src/assets/paddle.wav" id="paddleSound"></audio>
+    <audio src="./src/assets/wall.wav" id="wallSound"></audio>
+    <audio src="./src/assets/loss.wav" id="lossSound"></audio>
+
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const gameMode = localStorage.getItem("gameMode");
+            if (!gameMode) {
+                window.location.href = "./index.html";
+            } else {
+                console.log("Game Mode:", gameMode);
+                setGameMode(gameMode);
+            }
+        });
+    </script>
+</body>
+
+</html>
