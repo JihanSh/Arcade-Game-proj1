@@ -67,6 +67,7 @@ body {
 .title1 {
   position: absolute;
   margin-top: 20%;
+  font-size: 20px;
 }
 .score {
   position: absolute;
@@ -113,7 +114,7 @@ body {
 }
 .ready {
   position: absolute;
-  top:55%;
+  top: 55%;
   width: 500px;
   text-align: center;
   background: #222;
@@ -130,25 +131,30 @@ body {
   font-family: "Press Start 2P", system-ui;
 }
 .instructions {
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    margin: 8%;
-    width: 1900px;
-    gap: 30%;
-    color: #ccc;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  margin-top: 20%;
+  /* margin: 8%; */
+  gap: 35%;
+  color: #ccc;
 }
 .player1,
 .player2 {
-  width: 40%;
+  width: 100%;
+  /* width: 1900px; */
+
+  background: #222;
+  border-radius: 4px;
 }
 .instructions h2 {
-  font-size: 20px;
+  font-size: 15px;
   margin-bottom: 15px;
 }
 
 .instructions p {
-  font-size: 15px;
+  font-size: 12px;
+  line-height: 30px;
 }
 .playerMode1:hover,
 .playerMode2:hover {
