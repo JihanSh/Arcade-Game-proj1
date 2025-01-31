@@ -126,25 +126,30 @@ function ballMovement() {
     ballSpeedY = -ballSpeedY;
     playSound(wallSound);
   }
-  // paddle1 collision
+
+  // Paddle 1 collision (left paddle)
+  // Paddle 1 collision (left paddle)
   if (
     ballX <= paddle1.clientWidth &&
-    ballY >= paddle1Y &&
+    ballY + ball.clientHeight >= paddle1Y &&
     ballY <= paddle1Y + paddle1.clientHeight
   ) {
-    ballSpeedX = -ballSpeedX;
+    ballSpeedX = -ballSpeedX; // Reverse direction correctly
+    ballX = paddle1.clientWidth; // Move the ball outside the paddle to prevent sticking
     playSound(paddleSound);
   }
 
-  // paddle2 collision
+  // Paddle 2 collision (right paddle)
   if (
     ballX >= gameWidth - paddle2.clientWidth - ball.clientWidth &&
     ballY >= paddle2Y &&
     ballY <= paddle2Y + paddle2.clientHeight
   ) {
-    ballSpeedX = -ballSpeedX;
+    ballSpeedX = -ballSpeedX; // Reverse direction
+    ballX = gameWidth - paddle2.clientWidth - ball.clientWidth; // Prevent sticking
     playSound(paddleSound);
   }
+
   //collision with the wall
   if (ballX <= 0) {
     player2Score++;
@@ -154,6 +159,7 @@ function ballMovement() {
     pauseGame();
   } else if (ballX >= gameWidth - ball.clientWidth) {
     player1Score++;
+    playSound(lossSound);
     updateScore();
     resetBall();
     pauseGame();
