@@ -214,5 +214,5 @@ function moveAIPaddle() {
 }
 function returnToHome() {
   localStorage.removeItem("gameMode"); // Clear stored mode
-  window.location.href = "index.html";
+  window.location.href = "./index.html";
 }
