@@ -212,3 +212,7 @@ function moveAIPaddle() {
   paddle2Y = Math.max(0, Math.min(gameHeight - paddle2.clientHeight, paddle2Y));
   paddle2.style.top = paddle2Y + "px";
 }
+function returnToHome() {
+  localStorage.removeItem("gameMode"); // Clear stored mode
+  window.location.href = "index.html";
+}
